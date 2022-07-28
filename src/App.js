@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Header from './components/Header'
-import Card from './components/Card'
+import CoronaForCountry from './components/CoronaForCountry'
+import RecordedCorona from './components/RecordedCorona'
+import CoronaForContinent from './components/CoronaForContinent'
 
 export default function App() {
   const [key, setKey] = useState(1)
@@ -12,16 +14,10 @@ export default function App() {
       }} />
 
       <div className='md:container md: mx-auto p-8 page-content'>
-        {
-          key === 1 &&
-          <div>
-            <Card />
-          </div>
-        }
+        {key === 1 && <CoronaForCountry />}
+        {key === 2 && <RecordedCorona />}
+        {key === 3 && <CoronaForContinent />}
       </div>
-
-
-
     </>
   )
 }
