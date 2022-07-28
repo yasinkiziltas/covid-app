@@ -1,22 +1,51 @@
-import React from 'react'
-import k1 from '../img/k1.png'
+import React, { useState } from 'react'
+import Logo from './Logo'
+import MenuItem from './MenuItem'
+import PropTypes from 'prop-types'
 
-export default function Header() {
+export default function Header({ activeTitle, onMenuChange }) {
+    const [_activeTitle, setActiveTitle] = useState(activeTitle)
+    const [menuItems, setMenuItems] = useState([
+        {
+            id: 1,
+            title: 'Ülkelere Göre Covid Değerleri',
+        },
+        {
+            id: 2,
+            title: 'Kayda Geçmiş Tüm Corona Değerleri',
+        },
+        {
+            id: 3,
+            title: 'Kıtalara Göre Covid Değerleri',
+        }
+    ])
+
     return (
-        <div>
-            {/* mx-auto max-w-screen-xl */}
-            <nav className='bg-[#6e90b9] border-gray-400 h-20 flex justify-around items-center'>
-                <a href="#" class="flex items-center">
-                    <img src={k1} class="mr-3 h-6 sm:h-9" alt="Corona" />
-                    <span class="self-center text-xl font-semibold text-white">Corona App</span>
-                </a>
+        <nav className='bg-gray-800 border-gray-200 px-2 py-2.5'>
+            <div className='container flex flex-wrap justify-between items-center mx-auto'>
+                <Logo />
 
-                <div class="flex items-center lg:order-2">
-                    <button class="text-white bg-primary-700  hover:bg-slate-300 focus:ring-4 focus:bg-gray-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Ülkelere Göre Covid Değerleri</button>
-                    <button class="text-white bg-primary-700  hover:bg-slate-300 focus:ring-1  focus:bg-gray-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Kayda Geçmiş Tüm Corona Değerleri</button>
-                    <button class="text-white bg-primary-700  hover:bg-slate-300 focus:ring-4  focus:bg-gray-700 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2">Kıtalara Göre Covid Değerleri</button>
+                <div>
+                    <ul className='flex flex-row mt-3 font-semibold text-base space-x-10'>
+                        {menuItems.map(item => {
+                            return (
+                                <MenuItem key={item.id} title={item.title} active={item.title === _activeTitle} onClick={() => {
+                                    setActiveTitle(item.title)
+                                    onMenuChange(item.id)
+                                }} />
+                            )
+                        })}
+                    </ul>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     )
+}
+Header.propTypes = {
+    activeTitle: PropTypes.string,
+    onMenuChange: PropTypes.func
+}
+Header.defaultProps = {
+    activeTitle: 'Ülkelere Göre Covid Değerleri',
+    onMenuChange: () => { }
 }
