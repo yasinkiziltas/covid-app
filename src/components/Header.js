@@ -29,10 +29,14 @@ export default function Header({ activeTitle, onMenuChange }) {
                     <ul className='flex flex-row mt-3 font-semibold text-base space-x-10'>
                         {menuItems.map(item => {
                             return (
-                                <MenuItem key={item.id} title={item.title} active={item.title === _activeTitle} onClick={() => {
-                                    setActiveTitle(item.title)
-                                    onMenuChange(item.id)
-                                }} />
+                                <MenuItem
+                                    key={item.id}
+                                    title={item.title}
+                                    active={item.title === _activeTitle} 
+                                    onClick={() => {
+                                        setActiveTitle(item.title)
+                                        onMenuChange(item.id)
+                                    }} />
                             )
                         })}
                     </ul>

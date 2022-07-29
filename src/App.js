@@ -10,7 +10,6 @@ export default function App() {
     <>
       <Header onMenuChange={(key) => {
         setKey(key)
-
       }} />
 
       <div className='md:container md: mx-auto p-8 page-content'>
